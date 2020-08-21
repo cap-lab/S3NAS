@@ -1,0 +1,23 @@
+{
+  "img_size": 224,
+  "img_c": 3,
+  "n_classes": 1000,
+  "first_conv": {
+    "cls": "Conv2D",
+    "output_filters": 32,
+    "kernel_size": 7,
+    "strides": 2
+  },
+  "stages_args": [
+    "r2_k5_s22_e6_i32_o32_c12",
+    "r3_k5_s22_e6_i32_o64_c12",
+    "r5_k5_s22_e6_i64_o128_c12",
+    "r2_k5_s11_e6_i128_o160_c12",
+    "r8_k5_s22_e6_i160_o256_c12"
+  ],
+  "feature_mix_layer": {
+    "cls": "Conv2D",
+    "output_filters": 1280,
+    "kernel_size": 1
+  }
+}
