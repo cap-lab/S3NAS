@@ -1,0 +1,3 @@
+[submodule "latency"]
+	path = latency
+	url = https://github.com/cap-lab/S3NAS_latency

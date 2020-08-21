@@ -30,7 +30,7 @@ We conduct NAS Following three steps : **S**upernet design, **S**ingle-Path NAS 
     
     to use our profiled latency files for MIDAP, please type
     ```
-    git submodule --init --recursive
+    git submodule update --init --recursive
    ```
     
 3. Set up flags and run
