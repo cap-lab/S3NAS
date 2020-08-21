@@ -32,7 +32,7 @@ export TRAIN_DIR=${TEST_SAVE_FOLDER}/${TEST_NAME}_train
 export BACKUP_DIR=${SEARCH_DIR}_${SUPERGRAPH_TRAIN_EPOCHS}epoch
 
 export COMMON_SEARCH_SETTINGS="--constraint_lut_folder=WRITE_LATENCY_FOLDER --drop_connect_rate=0 --use_nas_modelmaker=True --epochs_per_eval=10 --train_batch_size=$SEARCH_BATCH_SIZE --eval_batch_size=$EVAL_BATCH_SIZE --model_json_path=$MODEL_JSON --model_dir=${SEARCH_DIR} --target_latency=$TARGET_LATENCY --dropout_rate=$DROPOUT --data_dir=$DATA_DIR --input_image_size=$INPUT_IMAGE_SIZE"
-export SEARCH_SETTINGS="--log_nestedblock_tensor=never --train_epochs=$SUPERGRAPH_TRAIN_EPOCHS --supergraph_train_epochs=$DUMMY_EPOCH_TO_AVOID_TENSORBOARD_ERROR"
+export SEARCH_SETTINGS="--log_searchableblock_tensor=never --train_epochs=$SUPERGRAPH_TRAIN_EPOCHS --supergraph_train_epochs=$DUMMY_EPOCH_TO_AVOID_TENSORBOARD_ERROR"
 
 export SEARCH_LOG_FILE=${TEST_NAME}_search.log
 
@@ -42,7 +42,6 @@ gsutil cp ${SEARCH_LOG_FILE} ${SEARCH_DIR}/${SEARCH_LOG_FILE}
 
 # backup
 gsutil -m cp -r ${SEARCH_DIR} $BACKUP_DIR
-#cp -r ${SEARCH_DIR} ${SEARCH_DIR}_${SUPERGRAPH_TRAIN_EPOCHS}epoch
 
 # complete search
 export SEARCH_SETTINGS="--train_epochs=$TOTAL_SERACH_EPOCHS --supergraph_train_epochs=$SUPERGRAPH_TRAIN_EPOCHS"

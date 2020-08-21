@@ -26,8 +26,8 @@ FLAGS = flags.FLAGS
 
 class TrainNEval(object):
     def __init__(self, model_fn):
-        config = self.set_and_get_device_config()
         self.params = {}  # We will save class attr in here
+        config = self.set_and_get_device_config()
         self.set_train_params()
         self.build_estimator(model_fn, config)
 
