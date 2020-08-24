@@ -57,6 +57,6 @@ gsutil cp $PARSE_LOG_FILE ${SEARCH_DIR}/${PARSE_LOG_FILE}
 # train result
 export TRAIN_SETTINGS="--model_json_path=${SEARCH_DIR}/parsed_model.json --input_image_size=$INPUT_IMAGE_SIZE --model_dir=$TRAIN_DIR --train_batch_size=$TRAIN_BATCH_SIZE --eval_batch_size=$EVAL_BATCH_SIZE --dropout_rate=$DROPOUT --data_dir=$DATA_DIR"
 export TRAIN_LOG_FILE=${TEST_NAME}_train.log
-python run/main.py --train_epochs=150 --epochs_per_eval=50 $TPU_SETTINGS $TRAIN_SETTINGS 2>>$TRAIN_LOG_FILE
+python run/main.py --train_epochs=120 --epochs_per_eval=40 $TPU_SETTINGS $TRAIN_SETTINGS 2>>$TRAIN_LOG_FILE
 python run/main.py --train_epochs=350 --epochs_per_eval=5 $TPU_SETTINGS $TRAIN_SETTINGS 2>>$TRAIN_LOG_FILE
 gsutil cp ${TRAIN_LOG_FILE} ${TRAIN_DIR}/${TRAIN_LOG_FILE}
