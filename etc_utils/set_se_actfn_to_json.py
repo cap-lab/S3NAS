@@ -23,7 +23,7 @@ parser.add_argument('--set_blocks_num', type=int, help="how many blocks you want
 
 parser.add_argument('--set_stage_i', type=str, default=None, help="stage_i to set se and act")
 parser.add_argument('--set_block_i', type=str, default=None, help="block_i to set se and act")
-parser.add_argument('--set_conv_type', type=str, default="", help="Set this if you want to set only specific conv type"
+parser.add_argument('--set_conv_type', type=str, default=None, help="Set this if you want to set only specific conv type"
                                                                   "Only used for stage_i")
 
 
