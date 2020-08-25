@@ -80,7 +80,7 @@ class MBConvBlock(tf.keras.layers.Layer, MyNetComponents):
         se_inner_act_fn = BlockArgsDecoder.get_se_inner_act_fn_from_string(self._global_params.se_inner_act_fn)
         se_gating_fn = BlockArgsDecoder.get_se_gating_fn_from_string(self._global_params.se_gating_fn)
 
-        self._se_layers = SE(self._global_params, num_reduced_filters, output_filters, se_inner_act_fn, se_gating_fn)
+        self._se = SE(self._global_params, num_reduced_filters, output_filters, se_inner_act_fn, se_gating_fn)
 
     def call(self, inputs, training=True, drop_connect_rate=None):
         x = self._expand_layers(inputs, training=training)
@@ -104,11 +104,11 @@ class MBConvBlock(tf.keras.layers.Layer, MyNetComponents):
         return x
 
     def _call_se(self, x):
-        outputs = self._se_layers(x)
+        outputs = self._se(x)
 
         log_excitation_names = FLAGS.log_excitation_names_containing
         if log_excitation_names:
-            activations = self._se_layers.activations
+            activations = self._se.activations
             this_excitation_name = activations.name.replace(":", "_")
             if 'all' in log_excitation_names or any(
                     [log_name in this_excitation_name for log_name in log_excitation_names]):
@@ -124,7 +124,7 @@ class MBConvBlock(tf.keras.layers.Layer, MyNetComponents):
     def _get_(self, what, input_shape=(224, 224, 3)):
         block_layers = [self._expand_layers, self._dwise_layers, self._proj_layers]
         if self._has_se:
-            block_layers.insert(2, self._se_layers)
+            block_layers.insert(2, self._se)
 
         result = 0
         for layers in block_layers:
