@@ -12,7 +12,7 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
 
 ## Requirements
 * Access to Cloud TPUs ([Official Cloud TPU Tutorial](https://cloud.google.com/tpu/docs/tutorials/mnasnet))
-* Tensorflow 1.13+
+* Tensorflow 1.13+ (1.13 if you want to use GPU)
 * Python 3.5+
 
 ### Usage
@@ -55,6 +55,13 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
     We provide script templates for NAS / train / post_process
 
 4. Run the script file.
+
+### Note
+* When running on Multi-GPU, set moving_average_decay=0.0. 
+    
+    Multi-GPU in TF 1.x does not support tf.train.ExponentialMovingAverage. [refer](https://github.com/tensorflow/tensorflow/issues/27392)
+
+* We didn't check the validity on Multi-GPU environment.
 
 ### Citation
 If it helps your research, please cite
