@@ -12,8 +12,9 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
 
 ## Requirements
 * Access to Cloud TPUs ([Official Cloud TPU Tutorial](https://cloud.google.com/tpu/docs/tutorials/mnasnet))
-* Tensorflow 1.13+ (1.13 if you want to use GPU)
+* Tensorflow 1.13+ and 2.0- (1.13 if you want to use GPU)
 * Python 3.5+
+* python-box
 
 ### Usage
 
