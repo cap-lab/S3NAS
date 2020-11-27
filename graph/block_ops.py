@@ -169,6 +169,9 @@ class DepthwiseConv2D(tf.keras.layers.DepthwiseConv2D, BasicOp):
         else:
             raise NotImplementedError
 
+    def call(self, inputs, training=None):
+        return super(DepthwiseConv2D, self).call(inputs)
+
 
 class GlobalAvgPool(tf.keras.layers.GlobalAveragePooling2D, BasicOp):
     def __init__(self, global_params, keep_dims=False):
