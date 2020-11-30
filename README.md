@@ -14,7 +14,7 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
 * Access to Cloud TPUs ([Official Cloud TPU Tutorial](https://cloud.google.com/tpu/docs/tutorials/mnasnet))
 * Tensorflow 1.13+ and 2.0- (1.13 if you want to use GPU)
 * Python 3.5+
-* python-box
+* python-box 3.4.6
 
 ### Usage
 
@@ -37,6 +37,10 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
     ```
     each latency file contains a dictionary with latency value. For example, the content of
     `r1_k3,5_s22_e2,4_i32_o32_c100_noskip_relu_imgsize112` may be `{"latency": 364425}`
+    
+    For blocks, imgsize indicate width/height of input image of the block. Activation function is set to be relu as default. For more information, refer [latency_estimator.py](graph/latency_estimator.py) and [blockargs.py](graph/blockargs.py).
+    
+    For other components, the file name rule is similar, you can refer to `get_str` ftns of each BasicOps. refer [block_ops.py](graph/block_ops.py)
     
     to use our profiled latency files for MIDAP, please type
     ```

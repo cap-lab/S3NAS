@@ -36,6 +36,9 @@ export SEARCH_SETTINGS="--log_searchableblock_tensor=never --train_epochs=$SUPER
 
 export SEARCH_LOG_FILE=${TEST_NAME}_search.log
 
+
+###### Search
+### 1st phase
 # supergraph train
 python run/main.py --clip_gradients=10.0 $TPU_SETTINGS $SEARCH_SETTINGS $COMMON_SEARCH_SETTINGS 2>> $SEARCH_LOG_FILE
 gsutil cp ${SEARCH_LOG_FILE} ${SEARCH_DIR}/${SEARCH_LOG_FILE}
@@ -43,17 +46,19 @@ gsutil cp ${SEARCH_LOG_FILE} ${SEARCH_DIR}/${SEARCH_LOG_FILE}
 # backup
 gsutil -m cp -r ${SEARCH_DIR} $BACKUP_DIR
 
+### 2nd phase (can be run with other config starting from previous backup)
 # complete search
 export SEARCH_SETTINGS="--train_epochs=$TOTAL_SERACH_EPOCHS --supergraph_train_epochs=$SUPERGRAPH_TRAIN_EPOCHS"
 python run/main.py $TPU_SETTINGS $SEARCH_SETTINGS $COMMON_SEARCH_SETTINGS 2>>${SEARCH_LOG_FILE}
 gsutil cp ${SEARCH_LOG_FILE} ${SEARCH_DIR}/${SEARCH_LOG_FILE}
 
-# parse search result
+### parse search result
 export PARSE_LOG_FILE=${TEST_NAME}_parse.log
 python graph/print_parsed_args.py --parse_search_dir=${SEARCH_DIR} --search_model_json_path=$MODEL_JSON 2>> $PARSE_LOG_FILE
 python etc_utils/print_latency_from_tb.py --tensorboard_dir=${SEARCH_DIR} 2>> $PARSE_LOG_FILE
 gsutil cp $PARSE_LOG_FILE ${SEARCH_DIR}/${PARSE_LOG_FILE}
 
+###### Train
 # train result
 export TRAIN_SETTINGS="--model_json_path=${SEARCH_DIR}/parsed_model.json --input_image_size=$INPUT_IMAGE_SIZE --model_dir=$TRAIN_DIR --train_batch_size=$TRAIN_BATCH_SIZE --eval_batch_size=$EVAL_BATCH_SIZE --dropout_rate=$DROPOUT --data_dir=$DATA_DIR"
 export TRAIN_LOG_FILE=${TEST_NAME}_train.log
