@@ -92,6 +92,7 @@ class BlockArgsDecoder(object):
             for act_fn_string in supported_act_fns:
                 if act_fn_string in block_string:
                     result = act_fn_string
+                    break
         return result
 
     @classmethod
