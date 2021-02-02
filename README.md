@@ -55,18 +55,22 @@ We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) bel
     * Model file name
     * Google Cloud TPU name
     * Target latency
-    * Latency folder name
+    * Latency folder name `--constraint_lut_folder=XXX`
     
     We provide script templates for NAS / train / post_process
 
 4. Run the script file.
 
 ### Note
-* When running on Multi-GPU, set moving_average_decay=0.0. 
+* When running on Multi-GPU, set `--moving_average_decay=0.0`
     
     Multi-GPU in TF 1.x does not support tf.train.ExponentialMovingAverage. [refer](https://github.com/tensorflow/tensorflow/issues/27392)
 
-* We didn't check the validity on Multi-GPU environment.
+* When running on GPU, set `--use_tpu=False --transpose_input=False`
+
+* Setting `--use_cache=False` can reduce memory usage.
+
+* We didn't check the validity on GPU environment.
 
 ### Citation
 If it helps your research, please cite
