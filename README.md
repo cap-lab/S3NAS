@@ -5,8 +5,8 @@ We conduct NAS Following three steps : **S**upernet design, **S**ingle-Path NAS 
 
 
 ## Results
-We depict our search results on [MIDAP](https://github.com/cap-lab/MidapSim) below. Height of each block in the picture is proportional to expansion ratio. SE-applied blocks are depicted as dotted blocks.
-<p align="center"> <img width=1000 src="figures/final_archs.png"> </p>
+We share our weight and model files at [google drive](https://drive.google.com/drive/folders/1XcakQe1pgvOFKXruKIeTghWwKnr0Oalr?usp=sharing).
+
 <p align="center"> <img witdh=600 src="figures/perf_comparison.png"> </p>
 
 
